@@ -1,0 +1,3 @@
+﻿  vj2-a.c
+vj2-a.obj : error LNK2005: main already defined in vj1.obj
+C:\Users\Bepo Rosan\Desktop\Strukture-podataka\StrukturePodataka\x64\Debug\StrukturePodataka.exe : fatal error LNK1169: one or more multiply defined symbols found
