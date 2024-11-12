@@ -1,0 +1,12 @@
+
+Ime osobe: z
+Prezime osobe: z
+Godina rodenja: 9
+
+Ime osobe: Bepo
+Prezime osobe: Rosan
+Godina rodenja: 2003
+
+Ime osobe: a
+Prezime osobe: a
+Godina rodenja: 1

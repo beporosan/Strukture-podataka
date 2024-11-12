@@ -97,3 +97,27 @@ position find_by_lname(position first, char* lname) {
 	}
 	return NULL;
 }
+
+
+
+
+
+void sort(position headptr) {
+	position current = headptr;
+	if (!current->next || !current->next->next) {
+		return;
+	}
+	while (swapped) {
+		current = headptr;
+		swapped = false;
+		while(strcmp(current->next->lname, current->next->next->next->lname) > 0 ){
+			swapped = true;
+			position first = current->next;
+			position second = first->next;
+			first->next = second->next;
+			second->next = first;
+			current->next = second;
+		}
+		surrent = surrent->next;
+	}
+}

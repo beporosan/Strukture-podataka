@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_LINE (1024)									//P=Head
+#define MAX_LINE (1024)
 #define PROGRAM_ERROR (-1)
 #define NOT_FOUND (0)
 
@@ -23,6 +23,7 @@ Position Trazi(Position P);
 int Brisi(Position P);
 int Ispis(Position P);
 int UnosO(Position P);
+int Sortiraj(Position P);
 
 
 int main(void) {
@@ -193,5 +194,37 @@ int UnosO(Position P) {
 	printf("Godina rodenja nove osobe: ");
 	scanf_s("%d", &(P->godina));
 
+	return EXIT_SUCCESS;
+}
+
+int Sortiraj(Position P) {
+	Position Q, prev_Q, temp, end;
+
+	Q = (Position)malloc(sizeof(struct osoba));
+
+	if (Q == NULL) {
+		printf("Pogreska prilikom alociranja, alociranje neuspjesno.\n");
+		return PROGRAM_ERROR;
+	}
+
+	end = NULL;
+
+	while (P->Next != end) {
+		prev_Q = P;
+		Q = P->Next;
+		while (Q->Next != end) {
+			if (strcmp(Q->prezime, Q->Next->prezime) > 0) {
+				temp = Q->Next;
+				prev_Q->Next = temp;
+				Q->Next = temp->Next;
+				temp->Next = Q;
+
+				Q = temp;
+			}
+			prev_Q = Q;
+			Q = Q->Next;
+		}
+		end = Q;
+	}
 	return EXIT_SUCCESS;
 }

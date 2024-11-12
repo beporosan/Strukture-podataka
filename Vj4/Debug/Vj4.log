@@ -1,0 +1,7 @@
+﻿  Source.c
+C:\Users\Bepo Rosan\Desktop\Strukture-podataka\Vj4\Source.c(46,28): warning C4047: '=': 'Position' differs in levels of indirection from 'int'
+C:\Users\Bepo Rosan\Desktop\Strukture-podataka\Vj4\Source.c(55,31): warning C4047: '=': 'Position' differs in levels of indirection from 'int'
+C:\Users\Bepo Rosan\Desktop\Strukture-podataka\Vj4\Source.c(108,15): warning C4013: 'strlen' undefined; assuming extern returning int
+C:\Users\Bepo Rosan\Desktop\Strukture-podataka\Vj4\Source.c(271,12): warning C4047: 'return': 'int' differs in levels of indirection from 'Position'
+C:\Users\Bepo Rosan\Desktop\Strukture-podataka\Vj4\Source.c(290,12): warning C4047: 'return': 'int' differs in levels of indirection from 'Position'
+  Vj4.vcxproj -> C:\Users\Bepo Rosan\Desktop\Strukture-podataka\Vj4\Debug\Vj4.exe
