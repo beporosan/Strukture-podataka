@@ -136,25 +136,25 @@ int UnosDat(Position pHead, Position dHead) {
 int UnosSort(Position Head, int coef, int exp) {
 
 	Position P = Head;
-	Position D = NULL;
+	Position N = NULL;	//Novi
 	Position temp = NULL;
 
 	while (P->Next != NULL && P->Next->exp >= exp) {
 		P = P->Next;
 	}
 
-	D = (Position)malloc(sizeof(Polinom));
+	N = (Position)malloc(sizeof(Polinom));
 
-	if (D == NULL) {
+	if (N == NULL) {
 		printf("Pogreska prilikom alociranja, alociranje neuspjesno.\n");
 		return PROGRAM_ERROR;
 	}
 
-	D->coef = coef;
-	D->exp = exp;
+	N->coef = coef;
+	N->exp = exp;
 
-	D->Next = P->Next;
-	P->Next = D;
+	N->Next = P->Next;
+	P->Next = N;
 
 	UkloniDuple(Head);
 	BrisiNula(Head);
@@ -162,47 +162,27 @@ int UnosSort(Position Head, int coef, int exp) {
 }
 
 int Ispis(Position Head) {
+	Position P = Head->Next;  
+	int prvi = 1;         
 
-	Position P = Head;
+	while (P != NULL) {
+		if (P->exp != 0) {
+			if (P->coef >= 0 && !prvi) {
+				printf(" + ");
+			}
+			printf("%dx^%d", P->coef, P->exp);
+		}
+		else {
+			if (P->coef >= 0 && !prvi) {
+				printf(" + ");
+			}
+			printf("%d", P->coef);
+		}
 
-	while (P->Next != NULL) {
-		if (P->Next->exp != 0) {
-			if (P->Next->coef >= 0) {
-				printf("%dx^%d", P->Next->coef, P->Next->exp);
-				if (P->Next->Next != NULL) {
-					if (P->Next->Next->coef >= 0) {
-						printf(" + ");
-					}
-					else {
-						printf(" ");
-					}
-				}
-			}
-			else if (P->Next->coef < 0) {
-				printf("%dx^%d", P->Next->coef, P->Next->exp);
-				if (P->Next->Next != NULL) {
-					if (P->Next->Next->coef >= 0) {
-						printf(" + ");
-					}
-					else {
-						printf(" ");
-					}
-				}
-			}
-		}
-		else if (P->Next->exp == 0) {
-			printf("%d", P->Next->coef);
-			if (P->Next->Next != NULL) {
-				if (P->Next->Next->coef >= 0) {
-					printf(" + ");
-				}
-				else {
-					printf(" ");
-				}
-			}
-		}
+		prvi = 0;
 		P = P->Next;
 	}
+
 	printf("\n");
 	return EXIT_SUCCESS;
 }
