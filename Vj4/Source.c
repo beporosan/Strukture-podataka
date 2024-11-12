@@ -136,25 +136,25 @@ int UnosDat(Position pHead, Position dHead) {
 int UnosSort(Position Head, int coef, int exp) {
 
 	Position P = Head;
-	Position Q = NULL;
+	Position D = NULL;
 	Position temp = NULL;
 
 	while (P->Next != NULL && P->Next->exp >= exp) {
 		P = P->Next;
 	}
 
-	Q = (Position)malloc(sizeof(Polinom));
+	D = (Position)malloc(sizeof(Polinom));
 
-	if (Q == NULL) {
+	if (D == NULL) {
 		printf("Pogreska prilikom alociranja, alociranje neuspjesno.\n");
 		return PROGRAM_ERROR;
 	}
 
-	Q->coef = coef;
-	Q->exp = exp;
+	D->coef = coef;
+	D->exp = exp;
 
-	Q->Next = P->Next;
-	P->Next = Q;
+	D->Next = P->Next;
+	P->Next = D;
 
 	UkloniDuple(Head);
 	BrisiNula(Head);
@@ -210,24 +210,24 @@ int Ispis(Position Head) {
 int Dodaj(Position sum, int coef, int exp) {
 
 	Position P = sum;
-	Position Q = NULL;
+	Position D = NULL;
 
 	while (P->Next != NULL) {
 		P = P->Next;
 	}
 
-	Q = (Position)malloc(sizeof(Polinom));
+	D = (Position)malloc(sizeof(Polinom));
 
-	if (Q == NULL) {
+	if (D == NULL) {
 		printf("Pogreska prilikom alociranja, alociranje neuspjesno.\n");
 		return PROGRAM_ERROR;
 	}
 
-	Q->coef = coef;
-	Q->exp = exp;
+	D->coef = coef;
+	D->exp = exp;
 
-	Q->Next = P->Next;
-	P->Next = Q;
+	D->Next = P->Next;
+	P->Next = D;
 
 	return EXIT_SUCCESS;
 }
@@ -235,27 +235,27 @@ int Dodaj(Position sum, int coef, int exp) {
 int Suma(Position pHead, Position dHead) {
 
 	Position P = pHead->Next;
-	Position Q = dHead->Next;
+	Position D = dHead->Next;
 	Position sum = NULL;
 
 	sum = Stvori();
 
-	while (P != NULL && Q != NULL) {
+	while (P != NULL && D != NULL) {
 
-		if (P->exp > Q->exp) {							//ako je potencija prvog veca od drugog
+		if (P->exp > D->exp) {							//ako je potencija prvog veca od drugog
 			Dodaj(sum, P->coef, P->exp);
 			P = P->Next;
 		}
 
-		else if (P->exp < Q->exp) {						//ako je potencija drugog veca od prvog
-			Dodaj(sum, Q->coef, Q->exp);
-			Q = Q->Next;
+		else if (P->exp < D->exp) {						//ako je potencija drugog veca od prvog
+			Dodaj(sum, D->coef, D->exp);
+			D = D->Next;
 		}
 
-		else if (P->exp == Q->exp) {											//ako su iste potencije
-			Dodaj(sum, P->coef + Q->coef, P->exp);
+		else if (P->exp == D->exp) {											//ako su iste potencije
+			Dodaj(sum, P->coef + D->coef, P->exp);
 			P = P->Next;
-			Q = Q->Next;
+			D = D->Next;
 		}
 	}
 
@@ -263,9 +263,9 @@ int Suma(Position pHead, Position dHead) {
 		Dodaj(sum, P->coef, P->exp);
 		P = P->Next;
 	}
-	while (Q != NULL) {
-		Dodaj(sum, Q->coef, Q->exp);
-		Q = Q->Next;
+	while (D != NULL) {
+		Dodaj(sum, D->coef, D->exp);
+		D = D->Next;
 	}
 
 	return sum;
@@ -274,18 +274,18 @@ int Suma(Position pHead, Position dHead) {
 int Umnozak(Position pHead, Position dHead) {
 
 	Position P = pHead->Next;
-	Position Q = dHead->Next;
+	Position D = dHead->Next;
 	Position umn = NULL;
 
 	umn = Stvori();
 
 	while (P != NULL) {
-		while (Q != NULL) {
-			UnosSort(umn, P->coef * Q->coef, P->exp + Q->exp);
-			Q = Q->Next;
+		while (D != NULL) {
+			UnosSort(umn, P->coef * D->coef, P->exp + D->exp);
+			D = D->Next;
 		}
 		P = P->Next;
-		Q = dHead->Next;
+		D = dHead->Next;
 	}
 	return umn;
 }
@@ -293,7 +293,7 @@ int Umnozak(Position pHead, Position dHead) {
 int UkloniDuple(Position Head)
 {
 	Position P = Head;
-	Position Q = NULL;
+	Position D = NULL;
 	Position Z = NULL;
 
 	if (P == NULL)
@@ -304,9 +304,9 @@ int UkloniDuple(Position Head)
 		if (P->exp == P->Next->exp)					//ako uzastopne pozicije imaju isti eksponent, zbraja koeficijente, brise visak
 		{
 			P->coef = P->coef + P->Next->coef;
-			Q = P->Next->Next;
+			D = P->Next->Next;
 			free(P->Next);
-			P->Next = Q;
+			P->Next = D;
 
 		}
 		else
